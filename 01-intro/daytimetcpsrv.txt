@@ -1,0 +1,3 @@
+TODO: check why a non-root user is denied listening on port 13.
+Are non-privileged processes prohibited from listening on well-known ports?
+Where are the config settings?
