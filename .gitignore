@@ -1,0 +1,18 @@
+# Object files
+*.o
+
+# Libraries
+*.lib
+*.a
+
+# Shared objects
+*.so
+*.so.*
+
+# Vim
+*~
+*.swp
+*.swo
+
+# This project
+bin/

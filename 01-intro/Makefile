@@ -1,19 +1,30 @@
 QUIET?=@
 
-include ../Makefile
+-include ../project.mak
 
-TARGETS = \
+TARGETNAMES = \
 	daytimetcpcli \
 	daytimetcpsrv
 
+TARGETS := $(addprefix $(BLDDIR)/, $(TARGETNAMES))
+
 all: $(TARGETS)
 
-daytimetcpsrv: wrapsock.o wrapunix.o error.o
+$(BLDDIR)/daytimetcpsrv: daytimetcpsrv.o $(LIBSOCK) 
+	$(CC) -o $@ $^
 
-daytimetcpcli: error.o
+$(BLDDIR)/daytimetcpcli: daytimetcpsrv.o $(LIBSOCK)
+	$(CC) -o $@ $^
+
+# This include contains targets, so include after the default target
+-include ../lib.mak
 
 .PHONY: clean
 
 clean:
 	$(QUIET)rm -f $(TARGETS)
 	$(QUIET)rm -f *.o *.d *.tmp
+
+distclean: clean
+	$(QUIET)rm -f $(LIBS)
+	$(QUIET)rm -f $(LIBOBJ)

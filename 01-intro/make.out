@@ -1,13 +1,12 @@
-# GNU Make 3.81
-# Copyright (C) 2006  Free Software Foundation, Inc.
-# This is free software; see the source for copying conditions.
-# There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A
-# PARTICULAR PURPOSE.
+make: Nothing to be done for 'all'.
+# GNU Make 4.0
+# Built for x86_64-redhat-linux-gnu
+# Copyright (C) 1988-2013 Free Software Foundation, Inc.
+# License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+# This is free software: you are free to change and redistribute it.
+# There is NO WARRANTY, to the extent permitted by law.
 
-# This program built for x86_64-redhat-linux-gnu
-cc -g -Wall -I../lib   daytimetcpcli.c   -o daytimetcpcli
-
-# Make data base, printed on Sun Oct 18 22:14:50 2015
+# Make data base, printed on Thu Jan 21 22:08:24 2016
 
 # Variables
 
@@ -16,131 +15,133 @@ cc -g -Wall -I../lib   daytimetcpcli.c   -o daytimetcpcli
 # automatic
 ?F = $(notdir $?)
 # environment
-DESKTOP_SESSION = gnome
-# environment
-DCUR = /home/orosovet/src/driver/mydrv2
+DESKTOP_SESSION = mate
+# default
+.SHELLFLAGS := -c
 # default
 CWEAVE = cweave
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
-# makefile (from `../Makefile', line 5)
-CPPFLAGS = $(INCLUDE)
-# environment
-GTK_RC_FILES = /etc/gtk/gtkrc:/home/orosovet/.gtkrc-1.2-gnome2
+# makefile (from '../project.mak', line 10)
+CPPFLAGS = $(INCLUDES)
+# makefile (from '../project.mak', line 6)
+INCLUDES = $(addprefix -I, $(INCLUDE_DIRS))
 # automatic
 @D = $(patsubst %/,%,$(dir $@))
 # environment
-XAUTHORITY = /var/run/gdm/auth-for-orosovet-0IfAw3/database
+XAUTHORITY = /var/run/lightdm/admin/xauthority
 # environment
-GDMSESSION = gnome
+GDMSESSION = mate
 # environment
 XMODIFIERS = @im=none
 # makefile
-CURDIR := /home/orosovet/src/networking/stevens/01-intro
+CURDIR := /home/admin/src/networking/net-stevens/01-intro
 # makefile
 SHELL = /bin/sh
 # default
 RM = rm -f
 # environment
-GDM_LANG = en_US.UTF-8
+GDM_LANG = en_US.utf8
 # environment
 _ = /usr/bin/make
 # default
 PREPROCESS.F = $(FC) $(FFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -F
 # default
+LINK.m = $(OBJC) $(OBJCFLAGS) $(CPPFLAGS) $(LDFLAGS) $(TARGET_ARCH)
+# default
 LINK.o = $(CC) $(LDFLAGS) $(TARGET_ARCH)
 # default
 OUTPUT_OPTION = -o $@
 # environment
-gxsrc = sftp://rundcz30@gols//DKB3/DCZ3/SRC
+GTK_OVERLAY_SCROLLING = 0
 # default
 COMPILE.cpp = $(COMPILE.cc)
-# makefile (from `../Makefile', line 1)
-MAKEFILE_LIST :=  Makefile ../Makefile
+# makefile (from '../lib.mak', line 1)
+MAKEFILE_LIST :=  Makefile ../project.mak ../lib.mak
 # automatic
 @F = $(notdir $@)
+# makefile (from 'Makefile', line 5)
+TARGETNAMES = daytimetcpcli daytimetcpsrv
 # environment
-GIO_LAUNCHED_DESKTOP_FILE = /usr/share/applications/gnome-terminal.desktop
-# environment
-USERNAME = orosovet
+HISTCONTROL = ignoredups
+# 'override' directive
+GNUMAKEFLAGS := 
 # default
 LINK.p = $(PC) $(PFLAGS) $(CPPFLAGS) $(LDFLAGS) $(TARGET_ARCH)
 # environment
-SOE_ROOT = /home/orosovet/plxa/target/usr/local
-# environment
-DBUS_SESSION_BUS_ADDRESS = unix:abstract=/tmp/dbus-gHH1xGhUv8,guid=5c445d28d2197082029c63650000002b
+DBUS_SESSION_BUS_ADDRESS = unix:abstract=/tmp/dbus-GokimRPDZU,guid=161cde0a0d0a49dbbf065d6256a134f6
 # default
 CC = cc
 # default
 CHECKOUT,v = +$(if $(wildcard $@),,$(CO) $(COFLAGS) $< $@)
 # environment
-GNOME_KEYRING_SOCKET = /tmp/keyring-tyNHrk/socket
-# environment
 LESSOPEN = |/usr/bin/lesspipe.sh %s
-# environment
-MAIL = /var/spool/mail/orosovet
 # default
 CPP = $(CC) -E
-# makefile (from `../Makefile', line 1)
-INCLUDE_DIRS = ../lib
-# environment
-HISTCONTROL = ignoredups
-# environment
-ORBIT_SOCKETDIR = /tmp/orbit-orosovet
+# makefile (from '../project.mak', line 5)
+INCLUDE_DIRS := ../include
 # default
 LINK.cc = $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(LDFLAGS) $(TARGET_ARCH)
 # environment
-PATH = /usr/lib64/qt-3.3/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/orosovet/bin
+XDG_SESSION_PATH = /org/freedesktop/DisplayManager/Session0
+# default
+LEX = lex
+# default
+MAKE_HOST := x86_64-redhat-linux-gnu
+# environment
+PATH = /usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/home/admin/.local/bin:/home/admin/bin
 # default
 LD = ld
 # default
 TEXI2DVI = texi2dvi
-# default
-YACC = yacc
 # environment
-SESSION_MANAGER = local/unix:@/tmp/.ICE-unix/2765,unix/unix:/tmp/.ICE-unix/2765
+QT_GRAPHICSSYSTEM_CHECKED = 1
+# environment
+SESSION_MANAGER = local/unix:@/tmp/.ICE-unix/1441,unix/unix:/tmp/.ICE-unix/1441
 # default
 COMPILE.mod = $(M2C) $(M2FLAGS) $(MODFLAGS) $(TARGET_ARCH)
-# makefile (from `../Makefile', line 4)
-CFLAGS = -g -Wall
+# environment
+XDG_RUNTIME_DIR = /run/user/1000
+# makefile (from '../project.mak', line 9)
+CFLAGS = -g -Wall 
 # default
 ARFLAGS = rv
 # default
 LINK.r = $(FC) $(FFLAGS) $(RFLAGS) $(LDFLAGS) $(TARGET_ARCH)
 # environment
-WINDOWID = 67126598
+WINDOWID = 10486030
 # default
 COMPILE.f = $(FC) $(FFLAGS) $(TARGET_ARCH) -c
 # default
 LINT.c = $(LINT) $(LINTFLAGS) $(CPPFLAGS) $(TARGET_ARCH)
 # default
+YACC.m = $(YACC) $(YFLAGS)
+# default
 LINT = lint
-# environment
-gxwrk = sftp://rundcz30@gols//DKB3/DCZ3/WRK/OXR
 # default
 YACC.y = $(YACC) $(YFLAGS)
-# makefile (from `../Makefile', line 7)
-VPATH = ../lib
 # default
 AR = ar
 # default
-.FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
+.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # default
 TANGLE = tangle
 # environment
-LS_COLORS = rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=01;05;37;41:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lz=01;31:*.xz=01;31:*.bz2=01;31:*.tbz=01;31:*.tbz2=01;31:*.bz=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.rar=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.axv=01;35:*.anx=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=01;36:*.au=01;36:*.flac=01;36:*.mid=01;36:*.midi=01;36:*.mka=01;36:*.mp3=01;36:*.mpc=01;36:*.ogg=01;36:*.ra=01;36:*.wav=01;36:*.axa=01;36:*.oga=01;36:*.spx=01;36:*.xspf=01;36:
+XDG_GREETER_DATA_DIR = /var/lib/lightdm-data/admin
 # environment
-SSH_AUTH_SOCK = /tmp/keyring-tyNHrk/socket.ssh
+LS_COLORS = rs=0:di=38;5;33:ln=38;5;51:mh=00:pi=40;38;5;11:so=38;5;13:do=38;5;5:bd=48;5;232;38;5;11:cd=48;5;232;38;5;3:or=48;5;232;38;5;9:mi=01;05;37;41:su=48;5;196;38;5;15:sg=48;5;11;38;5;16:ca=48;5;196;38;5;226:tw=48;5;10;38;5;16:ow=48;5;10;38;5;21:st=48;5;21;38;5;15:ex=38;5;40:*.tar=38;5;9:*.tgz=38;5;9:*.arc=38;5;9:*.arj=38;5;9:*.taz=38;5;9:*.lha=38;5;9:*.lz4=38;5;9:*.lzh=38;5;9:*.lzma=38;5;9:*.tlz=38;5;9:*.txz=38;5;9:*.tzo=38;5;9:*.t7z=38;5;9:*.zip=38;5;9:*.z=38;5;9:*.Z=38;5;9:*.dz=38;5;9:*.gz=38;5;9:*.lrz=38;5;9:*.lz=38;5;9:*.lzo=38;5;9:*.xz=38;5;9:*.bz2=38;5;9:*.bz=38;5;9:*.tbz=38;5;9:*.tbz2=38;5;9:*.tz=38;5;9:*.deb=38;5;9:*.rpm=38;5;9:*.jar=38;5;9:*.war=38;5;9:*.ear=38;5;9:*.sar=38;5;9:*.rar=38;5;9:*.alz=38;5;9:*.ace=38;5;9:*.zoo=38;5;9:*.cpio=38;5;9:*.7z=38;5;9:*.rz=38;5;9:*.cab=38;5;9:*.jpg=38;5;13:*.jpeg=38;5;13:*.gif=38;5;13:*.bmp=38;5;13:*.pbm=38;5;13:*.pgm=38;5;13:*.ppm=38;5;13:*.tga=38;5;13:*.xbm=38;5;13:*.xpm=38;5;13:*.tif=38;5;13:*.tiff=38;5;13:*.png=38;5;13:*.svg=38;5;13:*.svgz=38;5;13:*.mng=38;5;13:*.pcx=38;5;13:*.mov=38;5;13:*.mpg=38;5;13:*.mpeg=38;5;13:*.m2v=38;5;13:*.mkv=38;5;13:*.webm=38;5;13:*.ogm=38;5;13:*.mp4=38;5;13:*.m4v=38;5;13:*.mp4v=38;5;13:*.vob=38;5;13:*.qt=38;5;13:*.nuv=38;5;13:*.wmv=38;5;13:*.asf=38;5;13:*.rm=38;5;13:*.rmvb=38;5;13:*.flc=38;5;13:*.avi=38;5;13:*.fli=38;5;13:*.flv=38;5;13:*.gl=38;5;13:*.dl=38;5;13:*.xcf=38;5;13:*.xwd=38;5;13:*.yuv=38;5;13:*.cgm=38;5;13:*.emf=38;5;13:*.ogv=38;5;13:*.ogx=38;5;13:*.aac=38;5;45:*.au=38;5;45:*.flac=38;5;45:*.m4a=38;5;45:*.mid=38;5;45:*.midi=38;5;45:*.mka=38;5;45:*.mp3=38;5;45:*.mpc=38;5;45:*.ogg=38;5;45:*.ra=38;5;45:*.wav=38;5;45:*.oga=38;5;45:*.opus=38;5;45:*.spx=38;5;45:*.xspf=38;5;45:
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 3174
+SSH_AUTH_SOCK = /home/admin/.cache/keyring-NS1UBY/ssh
 # default
 GET = get
 # automatic
 %F = $(notdir $%)
 # environment
-DISPLAY = :0.0
+DISPLAY = :0
 # default
 COMPILE.F = $(FC) $(FFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -c
+# makefile (from '../project.mak', line 2)
+BLDDIR = ../bin
 # default
 CTANGLE = ctangle
 # environment
@@ -150,45 +151,43 @@ IMSETTINGS_INTEGRATE_DESKTOP = yes
 # default
 LINK.C = $(LINK.cc)
 # environment
-PWD = /home/orosovet/src/networking/stevens/01-intro
+PWD = /home/admin/src/networking/net-stevens/01-intro
 # default
 LINK.S = $(CC) $(ASFLAGS) $(CPPFLAGS) $(LDFLAGS) $(TARGET_MACH)
+# environment
+XDG_SEAT = seat0
 # default
 PREPROCESS.r = $(FC) $(FFLAGS) $(RFLAGS) $(TARGET_ARCH) -F
+# environment
+SSH_AGENT_PID = 1616
 # default
 LINK.c = $(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(TARGET_ARCH)
-# environment
-G_BROKEN_FILENAMES = 1
 # default
 LINK.s = $(CC) $(ASFLAGS) $(LDFLAGS) $(TARGET_MACH)
+# makefile (from 'Makefile', line 1)
+QUIET = @
 # environment
-HOME = /home/orosovet
+HOME = /home/admin
+# makefile (from '../lib.mak', line 3)
+LIBSOCK = $(LIBDIR)/libsock.a
 # environment
-DRV = /home/orosovet/src/driver
-# environment
-XDG_SESSION_COOKIE = 59a7b74da095c6a7be3e853f00000033-1445194567.56106-1804893521
-# environment
-LOGNAME = orosovet
-# makefile (from `../Makefile', line 2)
-INCLUDE := -I../lib
-# environment
-GDM_KEYBOARD_LAYOUT = us
+LOGNAME = admin
 # default
 CO = co
 # default
-MAKE_VERSION := 3.81
-# environment
-GNOME_DESKTOP_SESSION_ID = this-is-deprecated
+MAKE_VERSION := 4.0
 # automatic
 ^D = $(patsubst %/,%,$(dir $^))
 # environment
-HOSTNAME = ester4
+HOSTNAME = localhost.localdomain
+# environment
+XDG_VTNR = 1
 # environment
 MAKELEVEL := 0
+# default
+COMPILE.m = $(OBJC) $(OBJCFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -c
 # environment
-SSH_ASKPASS = /usr/libexec/openssh/gnome-ssh-askpass
-# environment
-COLORTERM = gnome-terminal
+COLORTERM = mate-terminal
 # default
 MAKE = $(MAKE_COMMAND)
 # environment
@@ -202,21 +201,19 @@ PREPROCESS.S = $(CC) -E $(CPPFLAGS)
 # default
 COMPILE.p = $(PC) $(PFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -c
 # environment
-DTEST = /home/orosovet/src/driver/mydrv2/test
+XDG_SESSION_ID = 1
 # environment
-USER = orosovet
+USER = admin
 # default
 FC = f77
+# makefile
+.DEFAULT_GOAL := all
 # environment
-QTLIB = /usr/lib64/qt-3.3/lib
-# environment
-KSRC = /home/orosovet/kernel/linux-2.6.34.14
-# environment
-gxtsk = sftp://rundcz30@gols//DKB3/DCZ3/TSK
+XDG_CURRENT_DESKTOP = MATE
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
-# environment
-GNOME_KEYRING_PID = 2755
+# makefile (from '../lib.mak', line 7)
+LIBOBJ = $(subst .c,.o,$(wildcard $(LIBDIR)/*.c))
 # default
 WEAVE = weave
 # default
@@ -226,23 +223,25 @@ LINK.cpp = $(LINK.cc)
 # default
 F77 = $(FC)
 # environment
-OLDPWD = /home/orosovet/src/networking/stevens
+OLDPWD = /home/admin/src/networking/net-stevens
+# makefile (from '../lib.mak', line 2)
+LIBDIR = ../lib
 # default
 .VARIABLES := 
 # default
 PC = pc
 # environment
-CVS_RSH = ssh
-# environment
 IMSETTINGS_MODULE = none
 # automatic
 *F = $(notdir $*)
-# makefile (from `Makefile', line 3)
-TARGETS = daytimetcpcli
+# environment
+XDG_SEAT_PATH = /org/freedesktop/DisplayManager/Seat0
+# makefile (from 'Makefile', line 9)
+TARGETS := ../bin/daytimetcpcli ../bin/daytimetcpsrv
 # default
 COMPILE.def = $(M2C) $(M2FLAGS) $(DEFFLAGS) $(TARGET_ARCH)
-# default
-LEX = lex
+# environment
+GNOME_KEYRING_CONTROL = /home/admin/.cache/keyring-NS1UBY
 # makefile
 MAKEFLAGS = p
 # environment
@@ -250,9 +249,11 @@ MFLAGS = -p
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-KVER = 2.6.34.14
+MAIL = /var/spool/mail/admin
 # default
 LEX.l = $(LEX) $(LFLAGS) -t
+# default
+LEX.m = $(LEX) $(LFLAGS) -t
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # default
@@ -264,6 +265,8 @@ M2C = m2c
 # default
 MAKEFILES := 
 # default
+YACC = yacc
+# default
 COMPILE.cc = $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -c
 # automatic
 <F = $(notdir $<)
@@ -273,48 +276,44 @@ CXX = g++
 COFLAGS = 
 # default
 COMPILE.C = $(COMPILE.cc)
+# makefile (from '../lib.mak', line 5)
+LIBS = $(LIBSOCK)
 # automatic
 ^F = $(notdir $^)
 # default
 COMPILE.S = $(CC) $(ASFLAGS) $(CPPFLAGS) $(TARGET_MACH) -c
 # default
 LINK.F = $(FC) $(FFLAGS) $(CPPFLAGS) $(LDFLAGS) $(TARGET_ARCH)
-# environment
-PROJECT_ROOT = /home/orosovet/plxa
 # default
-SUFFIXES := .out .a .ln .o .c .cc .C .cpp .p .f .F .r .y .l .s .S .mod .sym .def .h .info .dvi .tex .texinfo .texi .txinfo .w .ch .web .sh .elc .el
+SUFFIXES := .out .a .ln .o .c .cc .C .cpp .p .f .F .m .r .y .l .ym .yl .s .S .mod .sym .def .h .info .dvi .tex .texinfo .texi .txinfo .w .ch .web .sh .elc .el
 # environment
 HISTSIZE = 1000
 # default
 COMPILE.c = $(CC) $(CFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -c
 # environment
-WINDOWPATH = 1
+MATE_DESKTOP_SESSION_ID = this-is-deprecated
 # default
 COMPILE.s = $(AS) $(ASFLAGS) $(TARGET_MACH)
 # default
 .INCLUDE_DIRS = /usr/include /usr/local/include /usr/include
-# environment
-QTINC = /usr/lib64/qt-3.3/include
-# environment
-QTDIR = /usr/lib64/qt-3.3
+# default
+.RECIPEPREFIX := 
 # default
 MAKEINFO = makeinfo
-# makefile
-.DEFAULT_GOAL := all
+# default
+OBJC = cc
 # default
 TEX = tex
 # environment
-LANG = en_US.UTF-8
+LANG = en_US.utf8
 # environment
-TERM = xterm
+TERM = xterm-256color
 # default
 F77FLAGS = $(FFLAGS)
 # default
 LINK.f = $(FC) $(FFLAGS) $(LDFLAGS) $(TARGET_ARCH)
-# environment
-gxrep = sftp://rundcz30@gols//DKB3/DCZ3/TSK/REP0
 # variable set hash-table stats:
-# Load=151/1024=15%, Rehash=0, Collisions=26/195=13%
+# Load=151/1024=15%, Rehash=0, Collisions=25/194=13%
 
 # Pattern-specific Variable Values
 
@@ -322,20 +321,18 @@ gxrep = sftp://rundcz30@gols//DKB3/DCZ3/TSK/REP0
 
 # Directories
 
-# ../lib (device 64768, inode 792829): 5 files, no impossibilities.
+# ../lib (device 64768, inode 134382): 10 files, no impossibilities.
 # SCCS: could not be stat'd.
-# . (device 64768, inode 792835): 7 files, 37 impossibilities.
-# ../lib/../SCCS: could not be stat'd.
-# ../lib/../RCS: could not be stat'd.
+# ../bin (device 64768, inode 4729627): 2 files, 38 impossibilities.
+# . (device 64768, inode 134375): 9 files, 38 impossibilities.
+# ../bin/SCCS: could not be stat'd.
+# ../bin/RCS: could not be stat'd.
 # ../SCCS: could not be stat'd.
-# ../lib/SCCS: could not be stat'd.
 # ../RCS: could not be stat'd.
-# ../lib/.. (device 64768, inode 792828): 7 files, 17 impossibilities.
-# .. (device 64768, inode 792828): 7 files, 17 impossibilities.
+# .. (device 64768, inode 4589976): 11 files, 38 impossibilities.
 # RCS: could not be stat'd.
-# ../lib/RCS: could not be stat'd.
 
-# 26 files, 71 impossibilities in 12 directories.
+# 32 files, 114 impossibilities in 10 directories.
 
 # Implicit Rules
 
@@ -348,165 +345,184 @@ gxrep = sftp://rundcz30@gols//DKB3/DCZ3/TSK/REP0
 %.o:
 
 %: %.o
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(LINK.o) $^ $(LOADLIBES) $(LDLIBS) -o $@
 
 %.c:
 
 %: %.c
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(LINK.c) $^ $(LOADLIBES) $(LDLIBS) -o $@
 
 %.ln: %.c
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(LINT.c) -C$* $<
 
 %.o: %.c
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(COMPILE.c) $(OUTPUT_OPTION) $<
 
 %.cc:
 
 %: %.cc
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(LINK.cc) $^ $(LOADLIBES) $(LDLIBS) -o $@
 
 %.o: %.cc
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(COMPILE.cc) $(OUTPUT_OPTION) $<
 
 %.C:
 
 %: %.C
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(LINK.C) $^ $(LOADLIBES) $(LDLIBS) -o $@
 
 %.o: %.C
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(COMPILE.C) $(OUTPUT_OPTION) $<
 
 %.cpp:
 
 %: %.cpp
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(LINK.cpp) $^ $(LOADLIBES) $(LDLIBS) -o $@
 
 %.o: %.cpp
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(COMPILE.cpp) $(OUTPUT_OPTION) $<
 
 %.p:
 
 %: %.p
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(LINK.p) $^ $(LOADLIBES) $(LDLIBS) -o $@
 
 %.o: %.p
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(COMPILE.p) $(OUTPUT_OPTION) $<
 
 %.f:
 
 %: %.f
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(LINK.f) $^ $(LOADLIBES) $(LDLIBS) -o $@
 
 %.o: %.f
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(COMPILE.f) $(OUTPUT_OPTION) $<
 
 %.F:
 
 %: %.F
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(LINK.F) $^ $(LOADLIBES) $(LDLIBS) -o $@
 
 %.o: %.F
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(COMPILE.F) $(OUTPUT_OPTION) $<
 
 %.f: %.F
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(PREPROCESS.F) $(OUTPUT_OPTION) $<
+
+%.m:
+
+%: %.m
+#  recipe to execute (built-in):
+	$(LINK.m) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+%.o: %.m
+#  recipe to execute (built-in):
+	$(COMPILE.m) $(OUTPUT_OPTION) $<
 
 %.r:
 
 %: %.r
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(LINK.r) $^ $(LOADLIBES) $(LDLIBS) -o $@
 
 %.o: %.r
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(COMPILE.r) $(OUTPUT_OPTION) $<
 
 %.f: %.r
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(PREPROCESS.r) $(OUTPUT_OPTION) $<
 
 %.y:
 
 %.ln: %.y
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(YACC.y) $< 
-	$(LINT.c) -C$* y.tab.c 
-	$(RM) y.tab.c
+	 $(LINT.c) -C$* y.tab.c 
+	 $(RM) y.tab.c
 
 %.c: %.y
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(YACC.y) $< 
-	mv -f y.tab.c $@
+	 mv -f y.tab.c $@
 
 %.l:
 
 %.ln: %.l
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	@$(RM) $*.c
-	$(LEX.l) $< > $*.c
+	 $(LEX.l) $< > $*.c
 	$(LINT.c) -i $*.c -o $@
-	$(RM) $*.c
+	 $(RM) $*.c
 
 %.c: %.l
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	@$(RM) $@ 
-	$(LEX.l) $< > $@
+	 $(LEX.l) $< > $@
 
 %.r: %.l
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(LEX.l) $< > $@ 
-	mv -f lex.yy.r $@
+	 mv -f lex.yy.r $@
+
+%.ym:
+
+%.m: %.ym
+#  recipe to execute (built-in):
+	$(YACC.m) $< 
+	 mv -f y.tab.c $@
+
+%.yl:
 
 %.s:
 
 %: %.s
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(LINK.s) $^ $(LOADLIBES) $(LDLIBS) -o $@
 
 %.o: %.s
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(COMPILE.s) -o $@ $<
 
 %.S:
 
 %: %.S
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(LINK.S) $^ $(LOADLIBES) $(LDLIBS) -o $@
 
 %.o: %.S
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(COMPILE.S) -o $@ $<
 
 %.s: %.S
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(PREPROCESS.S) $< > $@
 
 %.mod:
 
 %: %.mod
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(COMPILE.mod) -o $@ -e $@ $^
 
 %.o: %.mod
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(COMPILE.mod) -o $@ $<
 
 %.sym:
@@ -514,7 +530,7 @@ gxrep = sftp://rundcz30@gols//DKB3/DCZ3/TSK/REP0
 %.def:
 
 %.sym: %.def
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(COMPILE.def) -o $@ $<
 
 %.h:
@@ -526,47 +542,47 @@ gxrep = sftp://rundcz30@gols//DKB3/DCZ3/TSK/REP0
 %.tex:
 
 %.dvi: %.tex
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(TEX) $<
 
 %.texinfo:
 
 %.info: %.texinfo
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(MAKEINFO) $(MAKEINFO_FLAGS) $< -o $@
 
 %.dvi: %.texinfo
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(TEXI2DVI) $(TEXI2DVI_FLAGS) $<
 
 %.texi:
 
 %.info: %.texi
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(MAKEINFO) $(MAKEINFO_FLAGS) $< -o $@
 
 %.dvi: %.texi
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(TEXI2DVI) $(TEXI2DVI_FLAGS) $<
 
 %.txinfo:
 
 %.info: %.txinfo
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(MAKEINFO) $(MAKEINFO_FLAGS) $< -o $@
 
 %.dvi: %.txinfo
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(TEXI2DVI) $(TEXI2DVI_FLAGS) $<
 
 %.w:
 
 %.c: %.w
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(CTANGLE) $< - $@
 
 %.tex: %.w
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(CWEAVE) $< - $@
 
 %.ch:
@@ -574,441 +590,541 @@ gxrep = sftp://rundcz30@gols//DKB3/DCZ3/TSK/REP0
 %.web:
 
 %.p: %.web
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(TANGLE) $<
 
 %.tex: %.web
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(WEAVE) $<
 
 %.sh:
 
 %: %.sh
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	cat $< >$@ 
-	chmod a+x $@
+	 chmod a+x $@
 
 %.elc:
 
 %.el:
 
 (%): %
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(AR) $(ARFLAGS) $@ $<
 
 %.out: %
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	@rm -f $@ 
-	cp $< $@
+	 cp $< $@
 
 %.c: %.w %.ch
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(CTANGLE) $^ $@
 
 %.tex: %.w %.ch
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(CWEAVE) $^ $@
 
 %:: %,v
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(CHECKOUT,v)
 
 %:: RCS/%,v
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(CHECKOUT,v)
 
 %:: RCS/%
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(CHECKOUT,v)
 
 %:: s.%
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(GET) $(GFLAGS) $(SCCS_OUTPUT_OPTION) $<
 
 %:: SCCS/s.%
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(GET) $(GFLAGS) $(SCCS_OUTPUT_OPTION) $<
 
-# 86 implicit rules, 5 (5.8%) terminal.
+# 92 implicit rules, 5 (5.4%) terminal.
 
 # Files
 
 # Not a target:
 .web.p:
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(TANGLE) $<
 
 # Not a target:
 .l.r:
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(LEX.l) $< > $@ 
-	mv -f lex.yy.r $@
+	 mv -f lex.yy.r $@
 
-daytimetcpcli: daytimetcpcli.c
+../bin/daytimetcpsrv:
 #  Implicit rule search has been done.
-#  Implicit/static pattern stem: `daytimetcpcli'
-#  Modification time never checked.
+#  File does not exist.
 #  File has been updated.
-#  Failed to be updated.
-# automatic
-# @ := daytimetcpcli
-# automatic
-# % := 
-# automatic
-# * := daytimetcpcli
-# automatic
-# + := daytimetcpcli.c
-# automatic
-# | := 
-# automatic
-# < := daytimetcpcli.c
-# automatic
-# ^ := daytimetcpcli.c
-# automatic
-# ? := daytimetcpcli.c
-# variable set hash-table stats:
-# Load=8/32=25%, Rehash=0, Collisions=2/21=10%
-#  commands to execute (built-in):
-	$(LINK.c) $^ $(LOADLIBES) $(LDLIBS) -o $@
+#  Successfully updated.
 
 # Not a target:
 .dvi:
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 # Not a target:
-.F.o:
+.ym:
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (built-in):
-	$(COMPILE.F) $(OUTPUT_OPTION) $<
-
-all: daytimetcpcli
-#  Implicit rule search has been done.
-#  File does not exist.
-#  File has not been updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/11=0%
 
 # Not a target:
-.y.ln:
+.f.o:
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (built-in):
-	$(YACC.y) $< 
-	$(LINT.c) -C$* y.tab.c 
-	$(RM) y.tab.c
+#  recipe to execute (built-in):
+	$(COMPILE.f) $(OUTPUT_OPTION) $<
+
+# Not a target:
+.l:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+.m:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (built-in):
+	$(LINK.m) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+# Not a target:
+.ln:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 .o:
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(LINK.o) $^ $(LOADLIBES) $(LDLIBS) -o $@
 
 # Not a target:
 .y:
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 # Not a target:
 .def.sym:
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(COMPILE.def) -o $@ $<
+
+.PHONY: clean
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 .p.o:
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(COMPILE.p) $(OUTPUT_OPTION) $<
 
 # Not a target:
 .p:
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(LINK.p) $^ $(LOADLIBES) $(LDLIBS) -o $@
 
 # Not a target:
 .txinfo.dvi:
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(TEXI2DVI) $(TEXI2DVI_FLAGS) $<
 
 # Not a target:
 .a:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+.yl:
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 # Not a target:
 .l.ln:
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	@$(RM) $*.c
-	$(LEX.l) $< > $*.c
+	 $(LEX.l) $< > $*.c
 	$(LINT.c) -i $*.c -o $@
-	$(RM) $*.c
+	 $(RM) $*.c
+
+# Not a target:
+.F.o:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (built-in):
+	$(COMPILE.F) $(OUTPUT_OPTION) $<
+
+# Not a target:
+.texi.info:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (built-in):
+	$(MAKEINFO) $(MAKEINFO_FLAGS) $< -o $@
 
 # Not a target:
 .w.c:
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(CTANGLE) $< - $@
 
 # Not a target:
 .texi.dvi:
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(TEXI2DVI) $(TEXI2DVI_FLAGS) $<
 
 # Not a target:
-.sh:
+.ch:
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (built-in):
-	cat $< >$@ 
-	chmod a+x $@
+
+distclean: clean
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 27):
+	$(QUIET)rm -f $(LIBS)
+	$(QUIET)rm -f $(LIBOBJ)
+
+# Not a target:
+.m.o:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (built-in):
+	$(COMPILE.m) $(OUTPUT_OPTION) $<
 
 # Not a target:
 .cc:
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(LINK.cc) $^ $(LOADLIBES) $(LDLIBS) -o $@
 
 # Not a target:
 .cc.o:
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(COMPILE.cc) $(OUTPUT_OPTION) $<
 
 # Not a target:
-../Makefile:
-#  Implicit rule search has been done.
-#  Last modified 2015-10-18 22:14:45.106009146
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-# Not a target:
 .def:
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 # Not a target:
-.SUFFIXES: .out .a .ln .o .c .cc .C .cpp .p .f .F .r .y .l .s .S .mod .sym .def .h .info .dvi .tex .texinfo .texi .txinfo .w .ch .web .sh .elc .el
+.SUFFIXES: .out .a .ln .o .c .cc .C .cpp .p .f .F .m .r .y .l .ym .yl .s .S .mod .sym .def .h .info .dvi .tex .texinfo .texi .txinfo .w .ch .web .sh .elc .el
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 # Not a target:
 .c.o:
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(COMPILE.c) $(OUTPUT_OPTION) $<
 
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2015-10-18 22:10:25.453009234
+#  Last modified 2016-01-21 22:08:21.936677995
 #  File has been updated.
 #  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
 .r.o:
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(COMPILE.r) $(OUTPUT_OPTION) $<
 
 # Not a target:
 .r:
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(LINK.r) $^ $(LOADLIBES) $(LDLIBS) -o $@
 
 # Not a target:
-.info:
+.ym.m:
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
+#  recipe to execute (built-in):
+	$(YACC.m) $< 
+	 mv -f y.tab.c $@
+
+# Not a target:
+.y.ln:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (built-in):
+	$(YACC.y) $< 
+	 $(LINT.c) -C$* y.tab.c 
+	 $(RM) y.tab.c
 
 # Not a target:
 .elc:
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 # Not a target:
 .l.c:
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	@$(RM) $@ 
-	$(LEX.l) $< > $@
+	 $(LEX.l) $< > $@
 
 # Not a target:
 .out:
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
+all: ../bin/daytimetcpcli ../bin/daytimetcpsrv
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Successfully updated.
+
 # Not a target:
 .C:
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(LINK.C) $^ $(LOADLIBES) $(LDLIBS) -o $@
 
 # Not a target:
 .r.f:
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(PREPROCESS.r) $(OUTPUT_OPTION) $<
 
 # Not a target:
 .S:
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(LINK.S) $^ $(LOADLIBES) $(LDLIBS) -o $@
 
 # Not a target:
+../project.mak:
+#  Implicit rule search has been done.
+#  Last modified 2016-01-21 22:06:53.00245183
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
 .texinfo.info:
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(MAKEINFO) $(MAKEINFO_FLAGS) $< -o $@
 
 # Not a target:
 .c:
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(LINK.c) $^ $(LOADLIBES) $(LDLIBS) -o $@
 
 # Not a target:
 .w.tex:
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(CWEAVE) $< - $@
 
 # Not a target:
 .c.ln:
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(LINT.c) -C$* $<
 
 # Not a target:
 .s.o:
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(COMPILE.s) -o $@ $<
+
+../bin/daytimetcpcli:
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 .s:
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(LINK.s) $^ $(LOADLIBES) $(LDLIBS) -o $@
 
 # Not a target:
 .texinfo.dvi:
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(TEXI2DVI) $(TEXI2DVI_FLAGS) $<
 
 # Not a target:
 .el:
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 # Not a target:
-.texinfo:
+.lm.m:
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
+#  recipe to execute (built-in):
+	@$(RM) $@ 
+	 $(LEX.m) $< > $@
 
 # Not a target:
 .y.c:
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(YACC.y) $< 
-	mv -f y.tab.c $@
+	 mv -f y.tab.c $@
 
 # Not a target:
 .web.tex:
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(WEAVE) $<
 
 # Not a target:
-.texi.info:
+.texinfo:
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (built-in):
-	$(MAKEINFO) $(MAKEINFO_FLAGS) $< -o $@
 
 # Not a target:
 .DEFAULT:
@@ -1018,199 +1134,234 @@ Makefile:
 
 # Not a target:
 .h:
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
+
+../lib/libsock.a: ../lib/wrapunix.o ../lib/wrapsock.o ../lib/error.o
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from '../lib.mak', line 10):
+	$(AR) r $@ $?
 
 # Not a target:
 .tex.dvi:
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(TEX) $<
 
 # Not a target:
-.cpp.o:
+../lib/error.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (built-in):
+
+# Not a target:
+.cpp.o:
+#  Builtin rule
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (built-in):
 	$(COMPILE.cpp) $(OUTPUT_OPTION) $<
 
 # Not a target:
 .cpp:
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(LINK.cpp) $^ $(LOADLIBES) $(LDLIBS) -o $@
 
 clean:
+#  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
-#  Modification time never checked.
+#  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 8):
-	rm -f $(TARGETS)
-	rm -f *.o *.d *.tmp
-	
+#  recipe to execute (from 'Makefile', line 23):
+	$(QUIET)rm -f $(TARGETS)
+	$(QUIET)rm -f *.o *.d *.tmp
 
 # Not a target:
 .C.o:
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(COMPILE.C) $(OUTPUT_OPTION) $<
 
 # Not a target:
-.ln:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
 .texi:
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 # Not a target:
 .txinfo:
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 # Not a target:
 .tex:
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
+
+# Not a target:
+../lib.mak:
+#  Implicit rule search has been done.
+#  Last modified 2016-01-21 22:06:45.107609232
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 .txinfo.info:
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(MAKEINFO) $(MAKEINFO_FLAGS) $< -o $@
 
 # Not a target:
-.ch:
+.sh:
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
+#  recipe to execute (built-in):
+	cat $< >$@ 
+	 chmod a+x $@
 
 # Not a target:
 .S.s:
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(PREPROCESS.S) $< > $@
 
 # Not a target:
 .mod:
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(COMPILE.mod) -o $@ -e $@ $^
 
 # Not a target:
 .mod.o:
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(COMPILE.mod) -o $@ $<
 
 # Not a target:
 .F.f:
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(PREPROCESS.F) $(OUTPUT_OPTION) $<
 
 # Not a target:
 .w:
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 # Not a target:
 .S.o:
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(COMPILE.S) -o $@ $<
 
 # Not a target:
-daytimetcpcli.c:
-#  Implicit rule search has been done.
-#  Last modified 2015-10-18 22:03:22.659009235
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+../lib/wrapsock.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
-.l:
+../lib/wrapunix.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 # Not a target:
 .F:
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(LINK.F) $^ $(LOADLIBES) $(LDLIBS) -o $@
 
 # Not a target:
 .web:
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 # Not a target:
 .sym:
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 # Not a target:
 .f:
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (built-in):
+#  recipe to execute (built-in):
 	$(LINK.f) $^ $(LOADLIBES) $(LDLIBS) -o $@
 
 # Not a target:
-.f.o:
+.info:
+#  Builtin rule
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (built-in):
-	$(COMPILE.f) $(OUTPUT_OPTION) $<
 
 # files hash-table stats:
-# Load=72/1024=7%, Rehash=0, Collisions=430/2452=18%
+# Load=85/1024=8%, Rehash=0, Collisions=571/2271=25%
 # VPATH Search Paths
 
-# No `vpath' search paths.
+# No 'vpath' search paths.
 
-# General (`VPATH' variable) search path:
-# ../lib
+# No general ('VPATH' variable) search path.
 
-# # of strings in strcache: 2
-# # of strcache buffers: 1
-# strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
-# strcache free: total = 4075 / max = 4075 / min = 4075 / avg = 4075
+# strcache buffers: 2 (1) / strings = 948 / storage = 16055 B / avg = 16 B
+# current buf: size = 8162 B / used = 7902 B / count = 359 / avg = 22 B
+# other used: total = 7893 B / count = 589 / avg = 13 B
+# other free: total = 9 B / max = 9 B / min = 9 B / avg = 9 B
 
-# Finished Make data base on Sun Oct 18 22:14:50 2015
+# strcache performance: lookups = 1439 / hit rate = 34%
+# hash-table stats:
+# Load=948/8192=12%, Rehash=0, Collisions=345/1439=24%
+# Finished Make data base on Thu Jan 21 22:08:24 2016
 
