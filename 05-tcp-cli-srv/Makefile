@@ -3,17 +3,17 @@ QUIET?=@
 -include ../project.mak
 
 TARGETNAMES = \
-	daytimetcpcli \
-	daytimetcpsrv
+	tcpserv01 \
+	tcpcli01
 
 TARGETS := $(addprefix $(BLDDIR)/, $(TARGETNAMES))
 
 all: $(TARGETS)
 
-$(BLDDIR)/daytimetcpsrv: daytimetcpsrv.o $(LIBSOCK) 
+$(BLDDIR)/tcpserv01: tcpserv01.o $(LIBSOCK) 
 	$(CC) -o $@ $^
 
-$(BLDDIR)/daytimetcpcli: daytimetcpcli.o $(LIBSOCK)
+$(BLDDIR)/tcpcli01: tcpcli01.o $(LIBSOCK)
 	$(CC) -o $@ $^
 
 # This include contains targets, so include after the default target

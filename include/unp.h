@@ -187,8 +187,13 @@ struct in_pktinfo {
 #define BUFFSIZE    8192    /* buffer size for reads and writes */
 
 /* Define port number that can be used for client-server interaction */
+/* OXR: We use port 50000 for simplicity -- requires no root access */
+#define SERV_PORT       50000    /* TCP and UDP clients and servers */
+#define SERV_PORT_STR   "50000"  /* TCP and UDP clients and servers */
+#if 0
 #define SERV_PORT       9877    /* TCP and UDP clients and servers */
 #define SERV_PORT_STR   "9877"  /* TCP and UDP clients and servers */
+#endif
 #define UNIXSTR_PATH    "/tmo/unix.str"     /* stream clients/servers - UNIX domain */
 #define UNIXDG_PATH     "/tmp/unix.dg"      /* datagram clients/servers - UNIX domain */
 
@@ -273,5 +278,20 @@ void     err_quit(const char *, ...);
 void     err_ret(const char *, ...);
 void     err_sys(const char *, ...);
 
+/* str_cli.c */
+void str_cli(FILE *fp, int sockfd);
+
+/* str_echo.c */
+void str_echo(int sockfd);
+
+/* readline.c */
+ssize_t readline(int fd, void *vptr, size_t maxlen);
+ssize_t readlinebuf(void **vptrptr);
+
+/* readn.c */
+ssize_t readn(int fd, void *vptr, size_t n);
+
+/* writen.c */
+ssize_t writen(int fd, const void *vptr, size_t n);
 
 #endif /* __ump_h */
