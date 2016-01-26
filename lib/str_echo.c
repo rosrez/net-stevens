@@ -8,7 +8,6 @@ void str_echo(int sockfd)
 
     pid = getpid();
     
-    printf("Server process %d started servicing client\n", pid);
     for (;;) {
         if ((n = read(sockfd, buf, MAXLINE)) <= 0) {
             if (n == -1)
@@ -17,7 +16,7 @@ void str_echo(int sockfd)
         }
 
         buf[n] = '\0';
-        printf("Server %d read %ld bytes: %s\n", pid, (long) n, buf);
+        printf("Server %d read %ld bytes\n%s", pid, (long) n, buf);
 
         writen(sockfd, buf, n);
     }

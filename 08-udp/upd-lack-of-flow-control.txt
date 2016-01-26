@@ -1,0 +1,32 @@
+We start our server with a 'sleep_time' command line argument that specifies a number of microseconds to sleep before trying to receive another datagram.
+
+Then we start our client and tell it to send 2000 datagrams to the server.
+
+The result is:
+
+$ ./udpcli_loop 192.168.1.162 2000
+$ 
+
+(This means that all datagrams were sent successfully).
+
+When we stop our server, it displays the count of received datagrams:
+
+./udpserv_loop 1000
+^Creceived 109 datagrams
+
+This means that most of the datagrams were lost.
+
+If we run
+
+netstat -su (statistics for UDP)
+
+we see the following:
+
+Udp:
+    774360 packets received
+    11 packets to unknown port received.
+    1891 packet receive errors          <--- DROPPED BECAUSE OF INSUFFICIENT BUFFER SPACE: 2000 - 109 = 1891
+    776287 packets sent
+    1891 receive buffer errors          <--- DROPPED BECAUSE OF INSUFFICIENT BUFFER SPACE: 2000 - 109 = 1891
+    0 send buffer errors
+< ... other output omitted for brevity ...>

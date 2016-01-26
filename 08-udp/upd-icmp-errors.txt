@@ -1,0 +1,5 @@
+Some ICMP errors, like the lack of a server/peer application listening on a destination port, can be detected by programs. In order to get notifications about such errors, we must connect the socket (i.e. call connect() on it) before writing to the socket or reading from it.
+
+For an unconnected socket, it is possible to send a datagram to any host from the socket. Any host may send a datagram to the socket.
+
+On the other hand, connect() remembers the destination address for the socket so after connect, data exchange is only possible between these two endpoints. However, it is possible to call connect() on a UDP socket multiple times, to direct communication to a different endpoint.

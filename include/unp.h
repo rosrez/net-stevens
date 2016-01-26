@@ -234,7 +234,7 @@ struct sockaddr_storage {
 typedef void Sigfunc (int); /* signal handlers */
 
 #define min(a,b)    ((a) < (b) ? (a) : (b))
-#define max(a,b)    ((a) < (b) ? (a) : (b))
+#define max(a,b)    ((a) > (b) ? (a) : (b))
 
 #ifndef HAVE_ADDRINFO_STRUCT
 #include "../lib/addrinfo.h"
@@ -279,7 +279,15 @@ void     err_ret(const char *, ...);
 void     err_sys(const char *, ...);
 
 /* str_cli.c */
-void str_cli(FILE *fp, int sockfd);
+void str_cli_interactive(FILE *fp, int sockfd);
+/* str_cli_select.c */
+void str_cli_select(FILE *fp, int sockfd);
+
+#ifdef STR_CLI_INTERACTIVE
+#define str_cli str_cli_interactive
+#else
+#define str_cli str_cli_select
+#endif
 
 /* str_echo.c */
 void str_echo(int sockfd);
@@ -293,5 +301,20 @@ ssize_t readn(int fd, void *vptr, size_t n);
 
 /* writen.c */
 ssize_t writen(int fd, const void *vptr, size_t n);
+
+/* dg_cli.c */
+void dg_cli(FILE *fp, int sockfd, const SA *pservaddr, socklen_t servlen);
+
+/* dg_cli_connect.c */
+void dg_cli_connect(FILE *fp, int sockfd, const SA *pservaddr, socklen_t servlen);
+
+/* dg_echo.c */
+void dg_echo(int sockfd, SA *pcliaddr, socklen_t clilen);
+
+/* dg_echo_loop.c */
+void dg_echo_loop(int sockfd, SA *pcliaddr, socklen_t clilen, int sleep_time);
+
+/* dg_cli_loop.c */
+void dg_cli_loop(FILE *fp, int sockfd, const SA *pservaddr, socklen_t servlen, int dgcount);
 
 #endif /* __ump_h */

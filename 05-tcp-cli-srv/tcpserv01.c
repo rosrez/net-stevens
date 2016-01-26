@@ -24,7 +24,9 @@ int main(int argc, char *argv[])
 
         if ((childpid = fork()) == 0) {    /* child process */
             Close(listenfd);
+            printf("Server process %d is servicing client\n", getpid());
             str_echo(connfd);
+            printf("Server process %d - terminating\n", getpid());
             exit(0);
         }
 
