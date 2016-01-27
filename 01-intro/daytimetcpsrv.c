@@ -13,6 +13,10 @@ int main(int argc, char *argv[])
     char    buff[MAXLINE];
     time_t  ticks;
     socklen_t len;
+    int     port;
+
+    /* accept a port number from command line, if provided; otherwise default to port number 13 */
+    argc > 1 ? port = atoi(argv[1]) : 13;
 
     listenfd = Socket(AF_INET, SOCK_STREAM, 0);
     bzero(&servaddr, sizeof(servaddr));
@@ -25,7 +29,7 @@ int main(int argc, char *argv[])
     Listen(listenfd, LISTENQ);
 
     /* 
-     * Stevens omits the following line in the loop:
+     * Stevens omits the following line in the loop (in the first version of the server):
      *
      * len = sizeof(cliaddr);
      *

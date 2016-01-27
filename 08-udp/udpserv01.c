@@ -14,5 +14,9 @@ int main(int argc, char *argv[])
 
     Bind(sockfd, (SA *) &servaddr, sizeof(servaddr));
 
+    /* never returns */
     dg_echo(sockfd, (SA *) &cliaddr, sizeof(cliaddr));
+
+    /* to keep the compiler happy */
+    return 0;
 }

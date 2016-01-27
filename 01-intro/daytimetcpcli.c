@@ -8,12 +8,15 @@
 
 int main(int argc, char *argv[])
 {
-    int     sockfd, n;
+    int     sockfd, n, port;
     char    recvline[MAXLINE + 1];
     struct  sockaddr_in servaddr;
 
-    if (argc != 2)
+    if (argc < 2)
         err_quit("Usage: daytimecli <IPaddress>");
+
+    /* accept a port number from command line, if provided; otherwise default to port number 13 */
+    argc == 3 ? port = atoi(argv[2]) : 13;
 
     if ((sockfd = socket(AF_INET, SOCK_STREAM, 0)) < 0)
         err_sys("socket error");
