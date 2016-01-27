@@ -317,4 +317,16 @@ void dg_echo_loop(int sockfd, SA *pcliaddr, socklen_t clilen, int sleep_time);
 /* dg_cli_loop.c */
 void dg_cli_loop(FILE *fp, int sockfd, const SA *pservaddr, socklen_t servlen, int dgcount);
 
+/* host_serv.c */
+struct addrinfo *host_serv(const char *host, const char *serv, int family, int socktype);
+
+/* tcp_connect.c */
+int tcp_connect(const char *hostname, const char *service);
+
+/* sock_ntop.c */
+char *sock_ntop(const struct sockaddr *sa, socklen_t salen);
+
+/* sock_ntop_host.c */
+char *sock_ntop_host(const struct sockaddr *sa, socklen_t salen);
+
 #endif /* __ump_h */
