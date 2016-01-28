@@ -194,7 +194,7 @@ struct in_pktinfo {
 #define SERV_PORT       9877    /* TCP and UDP clients and servers */
 #define SERV_PORT_STR   "9877"  /* TCP and UDP clients and servers */
 #endif
-#define UNIXSTR_PATH    "/tmo/unix.str"     /* stream clients/servers - UNIX domain */
+#define UNIXSTR_PATH    "/tmp/unix.str"     /* stream clients/servers - UNIX domain */
 #define UNIXDG_PATH     "/tmp/unix.dg"      /* datagram clients/servers - UNIX domain */
 
 /* The following defines simplify typecasts, i.e. require less typing */
@@ -328,5 +328,8 @@ char *sock_ntop(const struct sockaddr *sa, socklen_t salen);
 
 /* sock_ntop_host.c */
 char *sock_ntop_host(const struct sockaddr *sa, socklen_t salen);
+
+/* sigchldwaitpid.c */
+void sig_chld(int signo);
 
 #endif /* __ump_h */
