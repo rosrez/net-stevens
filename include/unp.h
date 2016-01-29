@@ -332,4 +332,10 @@ char *sock_ntop_host(const struct sockaddr *sa, socklen_t salen);
 /* sigchldwaitpid.c */
 void sig_chld(int signo);
 
+/* read_fd.c */
+ssize_t read_fd(int fd, void *ptr, size_t nbytes, int *recvfd);
+
+/* write_fd.c */
+ssize_t write_fd(int fd, void *ptr, size_t nbytes, int sendfd);
+
 #endif /* __ump_h */

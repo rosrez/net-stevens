@@ -6,7 +6,9 @@ TARGETNAMES = \
 	unixstrcli \
 	unixstrserv \
 	unixdgcli \
-	unixdgserv
+	unixdgserv \
+	mycat \
+	openfile
 
 -include ../project.mak
 
@@ -23,4 +25,10 @@ $(BLDDIR)/unixdgcli: unixdgcli.o $(LIBSOCK)
 	$(CC) -o $@ $^
 
 $(BLDDIR)/unixdgserv: unixdgserv.o $(LIBSOCK)
+	$(CC) -o $@ $^
+
+$(BLDDIR)/mycat: mycat.o my_open.o $(LIBSOCK)
+	$(CC) -o $@ $^
+
+$(BLDDIR)/openfile: openfile.o $(LIBSOCK)
 	$(CC) -o $@ $^

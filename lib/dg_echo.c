@@ -8,8 +8,14 @@ void dg_echo(int sockfd, SA *pcliaddr, socklen_t clilen)
 
     for (;;) {
         len = clilen;
-        n = recvfrom(sockfd, mesg, MAXLINE, 0, pcliaddr, &len);
+        if ((n = recvfrom(sockfd, mesg, MAXLINE, 0, pcliaddr, &len)) == -1) {
+            perror("recvfrom() error");
+            exit(2);
+        }
 
-        sendto(sockfd, mesg, n, 0, pcliaddr, len);
+        if (sendto(sockfd, mesg, n, 0, pcliaddr, len) == -1) {
+            perror("sendto() error");
+            exit(2);
+        }
     }
 }
