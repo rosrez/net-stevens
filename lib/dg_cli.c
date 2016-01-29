@@ -6,7 +6,7 @@ void dg_cli(FILE *fp, int sockfd, const SA *pservaddr, socklen_t servlen)
     char    sendline[MAXLINE], recvline[MAXLINE];
 
     while (fgets(sendline, MAXLINE, fp) != NULL) {
-        if ((n = sendto(sockfd, sendline, strlen(sendline), 0, pservaddr, servlen)) == -1) {
+        if (sendto(sockfd, sendline, strlen(sendline), 0, pservaddr, servlen) == -1) {
             perror("sendto() erorr");
             exit(2);
         }

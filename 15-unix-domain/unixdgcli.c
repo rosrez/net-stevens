@@ -3,7 +3,9 @@
 int main(int argc, char *argv[])
 {
     int     sockfd;
+    socklen_t len;
     struct  sockaddr_un cliaddr, servaddr;
+    struct  sockaddr_un bindaddr;
 
     sockfd = socket(AF_LOCAL, SOCK_STREAM, 0);
 
@@ -16,11 +18,13 @@ int main(int argc, char *argv[])
         exit(2);
     }
 
-    printf("bound client to %s\n", cliaddr.sun_path);
+    len = sizeof(bindaddr);
+    getsockname(sockfd, (SA *) &bindaddr, &len);
+    printf("bound client to %s\n", bindaddr.sun_path);
 
     bzero(&servaddr, sizeof(servaddr));
     servaddr.sun_family = AF_LOCAL;
-    strcpy(servaddr.sun_path, UNIXDG_PATH);
+    strncpy(servaddr.sun_path, UNIXDG_PATH, sizeof(servaddr.sun_path) - 1);
 
     printf("sending to %s\n", servaddr.sun_path);
 

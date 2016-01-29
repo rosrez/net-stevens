@@ -4,8 +4,9 @@ int main(int argc, char *argv[])
 {
     int     listenfd, connfd;
     pid_t   childpid;
-    socklen_t clilen;
+    socklen_t clilen, len;
     struct sockaddr_un cliaddr, servaddr;
+    struct sockaddr_un bindaddr;
     void    sig_child(int);
 
     listenfd = socket(AF_LOCAL, SOCK_STREAM, 0);
@@ -13,7 +14,7 @@ int main(int argc, char *argv[])
     unlink(UNIXSTR_PATH);
     bzero(&servaddr, sizeof(servaddr));
     servaddr.sun_family = AF_LOCAL;
-    strcpy(servaddr.sun_path, UNIXSTR_PATH);
+    strncpy(servaddr.sun_path, UNIXSTR_PATH, sizeof(servaddr.sun_path) - 1);
 
     if (bind(listenfd, (SA *) &servaddr, sizeof(servaddr)) == 1) {
         perror("bind() error");
@@ -25,7 +26,9 @@ int main(int argc, char *argv[])
         exit(2);
     }
 
-    printf("listening on %s\n", servaddr.sun_path);
+    len = sizeof(bindaddr);
+    getsockname(listenfd, (SA *) &bindaddr, &len);
+    printf("bound to %s\n", bindaddr.sun_path);
 
     signal(SIGCHLD, sig_chld);
 
@@ -36,14 +39,14 @@ int main(int argc, char *argv[])
                 continue;           /* back to for() */
             else
                 err_sys("accept() error");
-
-            if ((childpid = fork()) == 0) {     /* child process */
-                close(listenfd);        /* closing the listening socket */
-                str_echo(connfd);       /* process the request */
-                exit(0);
-            }
-
-            close(connfd);
         }
+
+        if ((childpid = fork()) == 0) {     /* child process */
+            close(listenfd);        /* closing the listening socket */
+            str_echo(connfd);       /* process the request */
+            exit(0);
+        }
+
+        close(connfd);
     }
 }
