@@ -338,4 +338,13 @@ ssize_t read_fd(int fd, void *ptr, size_t nbytes, int *recvfd);
 /* write_fd.c */
 ssize_t write_fd(int fd, void *ptr, size_t nbytes, int sendfd);
 
+/* gf_time.c */
+char *gf_time(void);
+
+/* str_cli_nonb.c */
+void str_cli_nonb(FILE *fp, int sockfd);
+
+/* str_cli_fork.c */
+void str_cli_fork(FILE *fp, int sockfd);
+
 #endif /* __ump_h */
