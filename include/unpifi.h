@@ -13,6 +13,7 @@
 
 #include "unp.h"
 #include <net/if.h>
+#include <netpacket/packet.h>
 
 #define IFI_NAME 16 /* the same as IFNAMSIZE in <net/if.h> */
 #define IFI_HADDR 8 /* taking into account the future EUI-64 */

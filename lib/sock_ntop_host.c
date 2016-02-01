@@ -20,5 +20,8 @@ char *sock_ntop_host(const struct sockaddr *sa, socklen_t salen)
                 return NULL;
             return str;
         }
+
+        default:
+            return "<unresolved>";
     }
 }

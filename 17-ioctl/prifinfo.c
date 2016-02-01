@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
         err_quit("invalid <address-family>");
     doaliases = atoi(argv[2]);
 
-    for (ifihead = ifi = Get_ifi_info(family, doaliases);
+    for (ifihead = ifi = get_ifi_info(family, doaliases);
             ifi != NULL; ifi = ifi->ifi_next) {
         printf("%s <", ifi->ifi_name);
         if (ifi->ifi_index != 0)
@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
         if (ifi->ifi_flags & IFF_BROADCAST) printf("BCAST ");
         if (ifi->ifi_flags & IFF_MULTICAST) printf("MCAST ");
         if (ifi->ifi_flags & IFF_LOOPBACK) printf("LOOP ");
-        // if (ifi->ifi_flags & IFF_POINTTOPOINT) printf("P2P ");
+        if (ifi->ifi_flags & IFF_POINTOPOINT) printf("P2P ");
         printf(">\n");
 
         if ((i = ifi->ifi_hlen) > 0) {

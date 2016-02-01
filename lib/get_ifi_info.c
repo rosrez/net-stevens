@@ -2,6 +2,16 @@
 
 #include <sys/ioctl.h>
 
+/* Stevens 17.4-17.8 
+ * This function enumerates network interfaces and collects their characteristics
+ * such as names, MTU, broadcast addresses, and so on. 
+ * There is a function in Linux that does just that: getifaddrs(3). It also 
+ * returns a linked list of interface-related data. It is also paired with 
+ * the freeifaddrs() function to free memory occupied by the list. */
+
+
+/* 17.4 */
+
 struct ifi_info *get_ifi_info(int family, int doaliases)
 {
     struct  ifi_info *ifi, *ifihead, **ifipnext;
@@ -41,55 +51,156 @@ struct ifi_info *get_ifi_info(int family, int doaliases)
     lastname[0] = 0;
     sdlname = NULL;
 
-    for (ptr = buf; ptr < buf + ifc.ifc_len) {
+    /* 17.5 ----- */
+
+    for (ptr = buf; ptr < buf + ifc.ifc_len; ) {
         ifr = (struct ifreq *) ptr;
 
 #ifdef HAVE_SOCKADDR_SA_LEN
-    len = max(sizeof(struct sockaddr), ifr->ifr_addr.sa_len);
+        len = max(sizeof(struct sockaddr), ifr->ifr_addr.sa_len);
+#else   /* Linux */
+        switch(ifr->ifr_addr.sa_family) {
+            case AF_INET6:
+                len = sizeof(struct sockaddr_in6);
+                break;
+
+            case AF_INET:
+                /* fall through */
+
+            default:
+                len = sizeof(struct sockaddr);
+                break;
+#endif
+        }
+
+        ptr += sizeof(ifr->ifr_name) + len;     /* for the next line */
+
+        /* Note AF_PACKET on Linux corresponds to AF_LINK on FreeBSD,
+         * used by Stevens in his code. sockaddr_ll is the Linux's
+         * counterpart of sockaddr_ll used by FreeBSD.
+         * Replaced all FreeBSD types/constants with Linux-specific. */
+
+#ifdef AF_PACKET 
+        /* we assume, that AF_PACKET comes before AF_INET and AF_INET6 */
+        if (ifr->ifr_addr.sa_family == AF_PACKET) {
+            struct sockaddr_ll *sll = (struct sockaddr_ll *) &ifr->ifr_addr;
+            sdlname = ifr->ifr_name;
+            idx = sll->sll_ifindex;                 /* BSD: sdl->sdl_index; */
+            haddr = (char *) &sll->sll_addr[0];     /* BSD: sdl->sdl_data + sdl->sdl_nlen; */
+            hlen =  sll->sll_halen;                 /* BSD: sdl->sdl_alen; */
+        }
+#endif
+
+        if (ifr->ifr_addr.sa_family != family)
+            continue;       /* ignore if wrong address family */
+
+        myflags = 0;
+        if ((cptr = strchr(ifr->ifr_name, ':')) != NULL)
+            *cptr = 0;      /* replace a colon with null */
+        if (strncmp(lastname, ifr->ifr_name, IFNAMSIZ) == 0) {
+            if (!doaliases)
+                continue;   /* this interface is already processed */
+            myflags = IFI_ALIAS;
+        }
+        memcpy(lastname, ifr->ifr_name, IFNAMSIZ);
+
+        ifrcopy = *ifr;
+        ioctl(sockfd, SIOCGIFFLAGS, &ifrcopy);
+        flags = ifrcopy.ifr_flags;
+        if ((flags & IFF_UP) == 0)
+            continue;       /* ignore, if interface is down */
+
+        /* 17.6 --------- */
+
+        ifi = calloc(1, sizeof(struct ifi_info));
+        *ifipnext = ifi;             /* prev points to the new structure */
+        ifipnext = &ifi->ifi_next;  /* the pointer to next structure points here */
+
+        ifi->ifi_flags = flags;         /* IFF_xxx values */
+        ifi->ifi_myflags = myflags;     /* IFI_xxx values */
+#if defined(SIOCGIIFMTU) && defined(HAVE_STRUCT_IFREQ_IFR_MTU)
+        ioctl(sockfd, SIOCGIFMTU, &IFRCOPY);
+        ifi->ifi_mtu = ifrcopy.ifr_mtu;
 #else
-    switch(ifr->ifr_addr.sa_family) {
-    case AF_INET6:
-        len = sizeof(struct sockaddr_in6);
-        break;
-
-    case AF_INET:
-        /* fall through */
-
-    default:
-        len = sizeof(struct sockaddr);
-        break;
+        ifi->ifi_mtu = 0;
 #endif
-    }
+        memcpy(ifi->ifi_name, ifr->ifr_name, IFI_NAME);
+        ifi->ifi_name[IFI_NAME - 1] = '\0';
+        /* if sockaddr_ll refers to a different interfaces, it's ignored */
+        if (sdlname == NULL || strcmp(sdlname, ifr->ifr_name) != 0)
+            idx = hlen = 0;
+        ifi->ifi_index = idx;
+        ifi->ifi_hlen = hlen;
+        if (ifi->ifi_hlen > IFI_HADDR)
+            ifi->ifi_hlen = IFI_HADDR;
+        if (hlen)
+            memcpy(ifi->ifi_haddr, haddr, ifi->ifi_hlen);
 
-    ptr += sizeof(ifr->ifr_name) + len;     /* for the next line */
+        /* 17.7 ---------- */
 
-#ifdef HAVE_SOCKADDR_DL_STRUCT
-    /* we assume, that AF_LINK comes before AF_INET and AF_INET6 */
-    if (ifr->ifr_addr.sa_family == AF_LINK) {
-        struct sockadddr_dl *sdl = (struct sockaddr_dl *) &ifr->ifr_addr;
-        sdlname = ifr->ifr_name;
-        idx = sdl->sdl_index;
-        haddr = sdl->sdl_data + sdl->sdl_nlen;
-        hlen = sdl->sdl_alen;
-    }
+        switch (ifr->ifr_addr.sa_family) {
+            case AF_INET:
+                sinptr = (struct sockaddr_in *) &ifr->ifr_addr;
+                ifi->ifi_addr = calloc(1, sizeof(struct sockaddr_in));
+                memcpy(ifi->ifi_addr, sinptr, sizeof(struct sockaddr_in));
+
+#ifdef SIOCGIFBRDADDR
+                if (flags & IFF_BROADCAST) {
+                    ioctl(sockfd, SIOCGIFBRDADDR, &ifrcopy);
+                    sinptr = (struct sockaddr_in *) &ifrcopy.ifr_broadaddr;
+                    ifi->ifi_brdaddr = calloc(1, sizeof(struct sockaddr_in));
+                    memcpy(ifi->ifi_brdaddr, sinptr, sizeof(struct sockaddr_in));
+                }
 #endif
 
-    if (ifr->ifr_addr.sa_family != family)
-        continue;       /* ignore if wrong address family */
+#if SIOCGIFDSTADDR
+                if (flags & IFF_POINTOPOINT) {
+                    ioctl(sockfd, SIOCGIFDSTADDR, &ifrcopy);
+                    sinptr = (struct sockaddr_in *) &ifrcopy.ifr_dstaddr;
+                    ifi->ifi_dstaddr = calloc(1, sizeof(struct sockaddr_in));
+                    memcpy(ifi->ifi_dstaddr, sinptr, sizeof(struct sockaddr_in));
+                }
+#endif
+                break;
 
-    myflags = 0;
-    if ((cptr = strchr(ifr->ifrname, ":")) != NULL)
-        *cptr = 0;      /* replace a colon with null */
-    if (strncmp(lastname, ifr->ifrname, IFNAMSIZ) == 0) {
-        if (!doaliases)
-            continue;   /* this interface is already processed */
-        myflags = IFI_ALIAS;
+            case AF_INET6:
+                sin6ptr = (struct sockaddr_in6 *) &ifr->ifr_addr;
+                ifi->ifi_addr = calloc(1, sizeof(struct sockaddr_in6));
+                memcpy(ifi->ifi_addr, sin6ptr, sizeof(struct sockaddr_in6));
+
+#if SIOCGIFDSTADDR
+                if (flags & IFF_POINTOPOINT) {
+                    ioctl(sockfd, SIOCGIFDSTADDR, &ifrcopy);
+                    sin6ptr = (struct sockaddr_in6 *) &ifrcopy.ifr_dstaddr;
+                    ifi->ifi_dstaddr = calloc(1, sizeof(struct sockaddr_in6));
+                    memcpy(ifi->ifi_dstaddr, sin6ptr, sizeof(struct sockaddr_in6));
+                }
+#endif
+                break;
+
+            default:
+                break;
+        }
     }
-    memcpy(lastname, ifr->ifrname, IFNAMSIZ);
 
-    ifrcopy = *ifr;
-    ioctl(sockfd, SIOCGIFFLAGS, &ifrcopy);
-    flags = ifrcopy.ifrflags;
-    if ((flags & IFF_UP) == 0)
-        continue;       /* ignore, if interface is down */
+    free(buf);
+    return ifihead;     /* pointer to the head of linked list */
+}
+
+/* 17.8 -------- */
+
+void free_ifi_info(struct ifi_info *ifihead)
+{
+    struct ifi_info *ifi, *ifinext;
+    
+    for (ifi = ifihead; ifi != NULL; ifi = ifinext) {
+        if (ifi->ifi_addr != NULL)
+            free(ifi->ifi_addr);
+        if (ifi->ifi_brdaddr != NULL)
+            free(ifi->ifi_brdaddr);
+        if (ifi->ifi_dstaddr != NULL)
+            free(ifi->ifi_dstaddr);
+        /* current ifi_next will be gone after free() */
+        ifinext = ifi->ifi_next;
+    }
 }
