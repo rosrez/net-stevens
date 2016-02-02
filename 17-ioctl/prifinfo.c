@@ -23,6 +23,7 @@ int main(int argc, char *argv[])
         printf("%s <", ifi->ifi_name);
         if (ifi->ifi_index != 0)
             printf("(%d) ", ifi->ifi_index);
+        printf(">\n");
         printf("<");
 
         if (ifi->ifi_flags & IFF_UP) printf("UP ");
@@ -44,6 +45,9 @@ int main(int argc, char *argv[])
             printf(" MTU: %d\n", ifi->ifi_mtu);
 
         if ((sa = ifi->ifi_addr) != NULL)
+            printf(" IP addr: %s\n", sock_ntop_host(sa, sizeof(*sa)));
+
+        if ((sa = ifi->ifi_brdaddr) != NULL)
             printf(" broadcast addr: %s\n", sock_ntop_host(sa, sizeof(*sa)));
 
         if ((sa = ifi->ifi_dstaddr) != NULL)

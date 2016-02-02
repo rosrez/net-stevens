@@ -56,9 +56,16 @@ struct ifi_info *get_ifi_info(int family, int doaliases)
     for (ptr = buf; ptr < buf + ifc.ifc_len; ) {
         ifr = (struct ifreq *) ptr;
 
-#ifdef HAVE_SOCKADDR_SA_LEN
+/* 
+ * This complex logic provided by Stevens doesn't work for
+ * modern Linux. Linux just populates the buffer with 
+ * 'struct ifreq's.
+ */
+
+#if 0
+#//ifdef HAVE_SOCKADDR_SA_LEN
         len = max(sizeof(struct sockaddr), ifr->ifr_addr.sa_len);
-#else   /* Linux */
+#//else   /* Linux */
         switch(ifr->ifr_addr.sa_family) {
             case AF_INET6:
                 len = sizeof(struct sockaddr_in6);
@@ -70,10 +77,11 @@ struct ifi_info *get_ifi_info(int family, int doaliases)
             default:
                 len = sizeof(struct sockaddr);
                 break;
-#endif
         }
-
-        ptr += sizeof(ifr->ifr_name) + len;     /* for the next line */
+//#endif
+#endif
+        /* Linux: just skip over to next struct */
+        ptr += sizeof(*ifr);     /* for next entry in buffer */
 
         /* Note AF_PACKET on Linux corresponds to AF_LINK on FreeBSD,
          * used by Stevens in his code. sockaddr_ll is the Linux's
@@ -92,14 +100,14 @@ struct ifi_info *get_ifi_info(int family, int doaliases)
 #endif
 
         if (ifr->ifr_addr.sa_family != family)
-            continue;       /* ignore if wrong address family */
+            continue;       /* ignore if not desired address family */
 
         myflags = 0;
         if ((cptr = strchr(ifr->ifr_name, ':')) != NULL)
-            *cptr = 0;      /* replace a colon with null */
+            *cptr = 0;      /* replace colon with null */
         if (strncmp(lastname, ifr->ifr_name, IFNAMSIZ) == 0) {
             if (!doaliases)
-                continue;   /* this interface is already processed */
+                continue;   /* already processed this interface */
             myflags = IFI_ALIAS;
         }
         memcpy(lastname, ifr->ifr_name, IFNAMSIZ);
@@ -108,7 +116,7 @@ struct ifi_info *get_ifi_info(int family, int doaliases)
         ioctl(sockfd, SIOCGIFFLAGS, &ifrcopy);
         flags = ifrcopy.ifr_flags;
         if ((flags & IFF_UP) == 0)
-            continue;       /* ignore, if interface is down */
+            continue;       /* ignore if interface is not up */
 
         /* 17.6 --------- */
 
@@ -118,9 +126,11 @@ struct ifi_info *get_ifi_info(int family, int doaliases)
 
         ifi->ifi_flags = flags;         /* IFF_xxx values */
         ifi->ifi_myflags = myflags;     /* IFI_xxx values */
-#if defined(SIOCGIIFMTU) && defined(HAVE_STRUCT_IFREQ_IFR_MTU)
-        ioctl(sockfd, SIOCGIFMTU, &IFRCOPY);
-        ifi->ifi_mtu = ifrcopy.ifr_mtu;
+#if defined(SIOCGIFMTU) && defined(HAVE_STRUCT_IFREQ_IFR_MTU)
+        if (ioctl(sockfd, SIOCGIFMTU, &ifrcopy) == 0)
+            ifi->ifi_mtu = ifrcopy.ifr_mtu;
+        else
+            perror("ioctl() for SIOCIFMTU failed");
 #else
         ifi->ifi_mtu = 0;
 #endif
