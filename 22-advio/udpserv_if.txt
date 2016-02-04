@@ -1,0 +1,46 @@
+IN PROGRESS
+
+Server binds with all available addresses, forks a child to serve each interface and exits.
+
+$ ./udpserv_if 
+bound 127.0.0.1.50000
+bound 192.168.1.205.50000
+bound 192.168.1.255.50000
+bound to 0.0.0.0.50000
+
+Bound socket info along with owning processes:
+
+$ netstat -ulpen | grep 50000
+  udp        0      0 0.0.0.0:50000           0.0.0.0:*                           1000       25546      2348/./udpserv_if   
+  udp        0      0 192.168.1.255:50000     0.0.0.0:*                           1000       25545      2347/./udpserv_if   
+  udp        0      0 192.168.1.205:50000     0.0.0.0:*                           1000       25544      2346/./udpserv_if   
+  udp        0      0 127.0.0.1:50000         0.0.0.0:*                           1000       25543      2345/./udpserv_if  
+
+CLIENT #1 - localhost
+
+$ ./udpcli01 127.0.0.1
+Hey you
+Hey you
+^C
+
+SERVER OUTPUT #1
+
+$ child 2345, datagram from 127.0.0.1.56361, to 127.0.0.1.50000
+
+CLIENT #2 - unicast address
+
+$ ./udpcli01 192.168.1.205
+Unicast addr
+Unicast addr
+
+SERVER OUTPUT #2
+
+ child 2346, datagram from 192.168.1.205.55829, to 192.168.1.205.50000
+
+CLIENT #3 - broadcast address (connecting as root)
+
+# ./udpcli01 192.168.1.255
+Hey you
+sendto() erorr: Permission denied
+
+TODO: investigate the cause.
