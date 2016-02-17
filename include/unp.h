@@ -259,13 +259,26 @@ int  Accept(int, SA *, socklen_t *);
 void Bind(int, const SA *, socklen_t);
 void Connect(int, const SA *, socklen_t);
 void Close(int);
-
-void     Listen(int, int);
-
-
-int      Socket(int, int, int);
-void     Socketpair(int, int, int, int *);
-void     Writen(int, void *, size_t);
+void Getpeername(int fd, struct sockaddr *sa, socklen_t *salenptr);
+void Getsockname(int fd, struct sockaddr *sa, socklen_t *salenptr);
+void Getsockopt(int fd, int level, int optname, void *optval, socklen_t *optlenptr);
+void Listen(int, int);
+ssize_t Recv(int fd, void *ptr, size_t nbytes, int flags);
+ssize_t Recvfrom(int fd, void *ptr, size_t nbytes, int flags,
+         struct sockaddr *sa, socklen_t *salenptr);
+ssize_t Recvmsg(int fd, struct msghdr *msg, int flags);
+int Select(int nfds, fd_set *readfds, fd_set *writefds, fd_set *exceptfds,
+       struct timeval *timeout);
+void Send(int fd, const void *ptr, size_t nbytes, int flags);
+void Sendto(int fd, const void *ptr, size_t nbytes, int flags,
+       const struct sockaddr *sa, socklen_t salen);
+void Sendmsg(int fd, const struct msghdr *msg, int flags);
+void Setsockopt(int fd, int level, int optname, const void *optval, socklen_t optlen);
+void Shutdown(int fd, int how);
+int Sockatmark(int fd);
+int Socket(int, int, int);
+void Socketpair(int, int, int, int *);
+void Writen(int, void *, size_t);
 
 /* wrapunix.c */
 void     Write(int, void *, size_t);
