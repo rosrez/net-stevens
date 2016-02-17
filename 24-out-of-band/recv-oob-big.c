@@ -1,7 +1,8 @@
 /*
- * Stevens, 24.2.
+ * Stevens, 24.9.
  * Receiving program that detects OOB data with the SIGUSR signal
  * and reads OOB data in the signal handler.
+ * The program is supposed to be used with sender of bigger data (see 24.8).
  */
 
 #include "unp.h"
@@ -12,15 +13,23 @@ void sig_urg(int);
 
 int main(int argc, char *argv[])
 {
-    int     n;
-    char    buff[100];
+    int     size;
 
     if (argc == 2)
         listenfd = tcp_listen(NULL, argv[1], NULL);
     else if (argc == 3)
         listenfd = tcp_listen(argv[1], argv[2], NULL);
     else
-        err_quit("Usage: recv-oob [ <host> ] <port#>");
+        err_quit("Usage: recv-oob-big [ <host> ] <port#>");
+
+    /* 
+     * Since our sender will send a 16K chunk followed by OOB byte
+     * and we set the socket receive buffer to just 4K, we are 
+     * guaranteed to fill the receiving socket buffer first 
+     * and receive SIGURG while the actual urgent data has not yet been received.
+     */
+    size = 4096;
+    Setsockopt(listenfd, SOL_SOCKET, SO_RCVBUF, &size, sizeof(size));
 
     connfd = Accept(listenfd, NULL, NULL);
 
@@ -30,15 +39,16 @@ int main(int argc, char *argv[])
     fcntl(connfd, F_SETOWN, getpid());
 
     for ( ; ; ) {
-        if ((n = Read(connfd, buff, sizeof(buff) - 1)) == 0) {
-            printf("received EOF\n");
-            exit(0);
-        }
-        buff[n] = 0;        /* null terminate */
-        printf("read %d bytes: %s\n", n, buff);
+        /* wait for signals */
+        pause();
     }
 }
 
+/* 
+ * We'll receive a segment with the urgent flag set and therefore SIGURG 
+ * before the kernel receives the actual OOB byte. The attempt to read the byte
+ * will result in EWOULDBLOCK/EAGAIN (Resource temporarily unavailable).
+ */
 void sig_urg(int signo)
 {
     int     n;

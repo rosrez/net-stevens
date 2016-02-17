@@ -283,6 +283,9 @@ void Writen(int, void *, size_t);
 /* wrapunix.c */
 void     Write(int, void *, size_t);
 
+/* wrapunix.c */
+int     Read(int, void *, size_t);
+
 /* error.c */
 
 void     err_dump(const char *, ...);
@@ -335,6 +338,9 @@ struct addrinfo *host_serv(const char *host, const char *serv, int family, int s
 
 /* tcp_connect.c */
 int tcp_connect(const char *hostname, const char *service);
+
+/* tcp_listen.c */
+int tcp_listen(const char *host, const char *serv, socklen_t *addrlenp);
 
 /* sock_ntop.c */
 char *sock_ntop(const struct sockaddr *sa, socklen_t salen);

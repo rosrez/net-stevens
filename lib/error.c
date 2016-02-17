@@ -98,7 +98,7 @@ static void err_doit(int errnoflag, int level, const char *fmt, va_list ap)
     n = strlen(buf);
     if (errnoflag)
         snprintf(buf + n, MAXLINE - n, ": %s", strerror(errno_save));
-    strcat(buf, "\en");
+    strcat(buf, "\n");
 
     if (daemon_proc) {
         syslog(level, buf);

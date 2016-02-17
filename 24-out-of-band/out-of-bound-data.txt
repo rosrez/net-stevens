@@ -1,0 +1,43 @@
+@@
+1. A TCP CLIENT PROGRAM THAT SENDS DATA INCLUDING OUT-OF-BOUND DATA.
+
+The client is designed to send portions of normal data interspersed with individual bytes of out-of-bound data.
+
+Important design assumptions:
+
+1. The client sends individual bytes of OOB data because a TCP stream has only one OOB data mark (the so called urgent pointer). If we were to send, say, 3 bytes of OOB data, the urgent pointer would be set to the byte immediately following the last byte of OOB data. So it doesn't make sense to send OOB data longer than 1 byte.
+
+2. The client waits after sending each portion of data (both normal and OOB) to make sure the server receives individual chunks and reacts accordingly to each OOB byte. Otherwise, our data would probably arrive as a single segment with a single OOB urgent pointer at the end of the last urgent byte.
+
+$ ./send-oob 50000
+usage: send-oob <host> <port#>
+[admin@localhost bin]$ ./send-oob 127.0.0.1 50000
+wrote 3 bytes of normal data
+wrote 1 byte of OOB data
+wrote 2 bytes of normal data
+wrote 1 byte of OOB data
+wrote 2 bytes of normal data
+
+THE SERVER PROGRAM
+
+1. When a segment arrives at the server with urgent flag set, the server process receives a SIGURG signal. The signal is delivered only if the process became the owner of the socket, i.e. called fcntl(sockfd, F_SETOWN, getpid()).
+
+2. By default, the out-of-bound data is stored in a separate socket buffer (1-byte long). Upon signal delivery, we can call one of the recv() family functions with MSG_OOB flag to get the data. If OOB byte has not arrived yet, recv() will return EWOULDBLOCK. In this case, all the application can do is read whatever normal data are ready.
+
+3. If the process sets the SO_OOBINLINE socket option then the OOB byte remains in the regular receiving buffer of the socket. The process should just read the data and check the out-of-band mark to see if it reached the OOB byte.
+
+4. If a process explicitly attempts to read OOB data but the sender hasn't sent OOB data, recv() returns EINVAL.
+
+5. If a process explicitly attempts to read the same OOB data twice, recv() returns EINVAL.
+
+$ ./recv-oob 50000
+read 3 bytes: 123
+SIGURG received
+read 1 OOB byte: 4
+read 2 bytes: 56
+SIGURG received
+read 1 OOB byte: 7
+read 2 bytes: 89
+received EOF
+
+
