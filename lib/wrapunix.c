@@ -14,7 +14,7 @@ Write(int fd, void *ptr, size_t nbytes)
         err_sys("write() error");
 }
 
-void
+int
 Read(int fd, void *ptr, size_t nbytes)
 {
     int n;

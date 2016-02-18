@@ -96,7 +96,7 @@ static void err_doit(int errnoflag, int level, const char *fmt, va_list ap)
     vsprintf(buf, fmt, ap);             /* unprotected version */
 #endif
     n = strlen(buf);
-    if (errnoflag)
+    if (errnoflag && errno_save != 0)
         snprintf(buf + n, MAXLINE - n, ": %s", strerror(errno_save));
     strcat(buf, "\n");
 
