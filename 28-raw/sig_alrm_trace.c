@@ -1,6 +1,6 @@
 #include "trace.h"
 
-int     gotalarm;
+volatile int     gotalarm;
 
 void sig_alrm(int signo)
 {

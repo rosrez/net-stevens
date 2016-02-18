@@ -348,6 +348,13 @@ char *sock_ntop(const struct sockaddr *sa, socklen_t salen);
 /* sock_ntop_host.c */
 char *sock_ntop_host(const struct sockaddr *sa, socklen_t salen);
 
+/* sock_addr.c */
+int sock_cmp_addr(const struct sockaddr *sockaddr1, const struct sockaddr *sockaddr2, socklen_t addrlen);
+int sock_cmp_port(const struct sockaddr *sockaddr1, const struct sockaddr *sockaddr2, socklen_t addrlen);
+int sock_get_port(const struct sockaddr *sockaddr, socklen_t addrlen);
+void sock_set_addr(const struct sockaddr *sockaddr, socklen_t addrlen, void *ptr);
+void sock_set_port(const struct sockaddr *sockaddr, socklen_t addrlen, int port);
+
 /* sigchldwaitpid.c */
 void sig_chld(int signo);
 

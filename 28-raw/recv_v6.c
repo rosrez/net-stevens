@@ -31,7 +31,13 @@ int recv_v6(int seq, struct timeval *tv)
         len = pr->salen;
         n = recvfrom(recvfd, recvbuf, sizeof(recvbuf), 0, pr->sarecv, &len);
         if (n < 0) {
-            if (errno == EINTR)
+            /* 
+             * EINTR indicates an interrupted system call (maybe by our SIGALRM).
+             * Linux doesn't interrupt recvfrom() so we set a socket timeout option
+             * (in traceloop() function). If recvfrom() times out, it returns
+             * EAGAIN == EWOULDBLOCK
+             */
+            if (errno == EINTR || errno == EAGAIN)
                 continue;
             else
                 err_sys("recvfrom() error");

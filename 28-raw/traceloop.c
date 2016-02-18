@@ -45,9 +45,21 @@ void traceloop(void)
     double  rtt;
     struct rec *rec;
     struct timeval tvrecv;
+    struct timeval to = {.tv_sec = 1};
 
     recvfd = Socket(pr->sasend->sa_family, SOCK_RAW, pr->icmpproto);
     setuid(getuid());               /* don't need special permissions anymore */
+
+    /* 
+     * Linux doesn't seem to interrupt the recvfrom() system call. We use 
+     * recvfrom() on our raw receiving socket to collect ICMP responses.
+     * To prevent recv_v[46]() routines from waiting forever, we set a 
+     * 1-second timeout on the socket.
+     *
+     * Another technique we could employ is to call select() with a timeout
+     * and make sure we have something to read prior to calling recvfrom().
+     */
+    Setsockopt(recvfd, SOL_SOCKET, SO_RCVTIMEO, &to, sizeof(to));
 
     if (pr->sasend->sa_family == AF_INET6 && verbose == 0) {
         struct icmp6_filter myfilt;
@@ -56,7 +68,7 @@ void traceloop(void)
         ICMP6_FILTER_SETPASS(ICMP6_DST_UNREACH, &myfilt);
         setsockopt(recvfd, IPPROTO_IPV6, ICMP6_FILTER, &myfilt, sizeof(myfilt));
     }
-
+    
     sendfd = Socket(pr->sasend->sa_family, SOCK_DGRAM, 0);
 
     pr->sabind->sa_family = pr->sasend->sa_family;
@@ -96,16 +108,17 @@ void traceloop(void)
                         printf(" %s", sock_ntop_host(pr->sarecv, pr->salen));
                     memcpy(pr->salast, pr->sarecv, pr->salen);
                 }
+
+                tv_sub(&tvrecv, &rec->rec_tv);
+                rtt = tvrecv.tv_sec * 1000.0 + tvrecv.tv_usec / 1000.0;
+                printf(" %.3f ms", rtt);
+
+                if (code == -1)     /* port unreachable; at destination */
+                    done++;
+                else if (code >= 0)
+                    printf(" (ICMP %s)", (pr->icmpcode)(code));
+
             }
-            tv_sub(&tvrecv, &rec->rec_tv);
-            rtt = tvrecv.tv_sec * 1000.0 + tvrecv.tv_usec / 1000.0;
-            printf(" %.3f ms", rtt);
-
-            if (code == -1)     /* port unreachable; at destination */
-                done++;
-            else if (code >= 0)
-                printf(" (ICMP %s)", (pr->icmpcode)(code));
-
             fflush(stdout);
         }
         printf("\n");
