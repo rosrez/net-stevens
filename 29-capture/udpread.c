@@ -12,7 +12,7 @@ struct udpiphdr *udp_read(void)
         switch (datalink) {
         /* loopback header = 4 bytes */
         case DLT_NULL:
-            return upd_check(ptr + 4, len - 4);
+            return udp_check(ptr + 4, len - 4);
 
         /* Ethernet */
         case DLT_EN10MB:
@@ -51,7 +51,7 @@ struct udpiphdr *udp_check(char *ptr, int len)
 
     hlen = ip->ip_hl << 2;
     if (hlen < sizeof(struct ip))
-        err_quit("ip_hl = %d", ip_hl);
+        err_quit("ip_hl = %d", ip->ip_hl);
 
     if (len < hlen + sizeof(struct udphdr))
         err_quit("len = %d, hlen = %d", len, hlen);
@@ -59,10 +59,9 @@ struct udpiphdr *udp_check(char *ptr, int len)
     if ((ip->ip_sum = in_cksum((uint16_t *) ip, hlen)) != 0)
         err_quit("ip checksum error");
 
-    if (ip->ip_p == IPPROTO_UDP) {
-        ui = (struct udpiphdr *) ip;
-        return ui;
-    } else {
+    if (ip->ip_p != IPPROTO_UDP)
         err_quit("not a UDP packet");
-    }
+
+    ui = (struct udpiphdr *) ip;
+    return ui;
 }

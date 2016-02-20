@@ -1,0 +1,37 @@
+We are at 192.168.1.56.
+Our DNS server is at 62.179.1.60
+
+We send a DNS request (to port 53 == domain) for IPv4 address for root-servers.net with our udpcksum program.
+
+./udpcksum -i enp2s0 -v 62.179.1.60 domain
+device = enp2s0
+localnet = 192.168.1.0, netmask = 255.255.255.0
+cmd = udp and src host 62.179.1.60 and src port 53
+datalink = 1
+
+sent: 36 bytes of data
+UDP checksums on
+received UDP checksum = 5947
+
+1 packets received by filter
+0 packets dropped by kernel
+
+tcpdump output:
+
+# tcpdump -nvv host 192.168.1.56 and udp and port 53
+tcpdump: listening on enp2s0, link-type EN10MB (Ethernet), capture size 262144 bytes
+23:53:56.482509 IP (tos 0x0, ttl 64, id 52015, offset 0, flags [none], proto UDP (17), length 64)
+    192.168.1.56.52182 > 62.179.1.60.domain: [udp sum ok] 1234+ A? a.root-servers.net. (36)
+23:53:56.495250 IP (tos 0x0, ttl 59, id 0, offset 0, flags [DF], proto UDP (17), length 80)
+    62.179.1.60.domain > 192.168.1.56.52182: [udp sum ok] 1234 q: A? a.root-servers.net. 1/0/0 a.root-servers.net. A 198.41.0.4 (52)
+^C
+2 packets captured
+2 packets received by filter
+0 packets dropped by kernel
+
+We can check the same address with the 'host' utility to see that 
+we obtain an identical address in response:
+
+$ host a.root-servers.net
+a.root-servers.net has address 198.41.0.4
+a.root-servers.net has IPv6 address 2001:503:ba3e::2:30

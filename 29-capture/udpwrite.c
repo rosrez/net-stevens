@@ -11,12 +11,12 @@ void open_output(void)
      * Also must set IP_HDRINCL so we can write our own IP header.
      */
 
-    rawfd = Socket(dest->sa_family, SOCK_RAW, 0);
+    rawfd = Socket(dest->sa_family, SOCK_RAW, IPPROTO_RAW);
 
     Setsockopt(rawfd, IPPROTO_IP, IP_HDRINCL, &on, sizeof(on));
 }
 
-void upd_write(char *buf, int userlen)
+void udp_write(char *buf, int userlen)
 {
     struct udpiphdr *ui;
     struct ip *ip;
@@ -35,11 +35,16 @@ void upd_write(char *buf, int userlen)
     ui->ui_dst.s_addr = ((struct sockaddr_in *) dest)->sin_addr.s_addr;
     ui->ui_sport = ((struct sockaddr_in *) local)->sin_port;
     ui->ui_dport = ((struct sockaddr_in *) dest)->sin_port;
-    ui->ui_len = ui->ui_len;
+    /* 
+     * copy the current IP length to UDP length field, since
+     * now it includes only the UDP header payload size;
+     * we'll bump the IP header length up later
+     */
+    ui->ui_ulen = ui->ui_len;
 
     if (zerosum == 0) {
         if ((ui->ui_sum = in_cksum((uint16_t *) ui, userlen)) == 0)
-            ui->ui_sum == 0xffff;
+            ui->ui_sum = 0xffff;
     }
 
     /* fill in the rest of IP header */

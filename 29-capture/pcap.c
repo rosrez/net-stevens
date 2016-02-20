@@ -15,6 +15,9 @@ void open_pcap(void)
     printf("device = %s\n", device);
 
     /* hardcode: promisc=0, to_ms=500 */
+    if ((pd = pcap_open_live(device, snaplen, 0, 500, errbuf)) == NULL)
+        err_quit("pcap_open_live(): %s", errbuf);
+
     if (pcap_lookupnet(device, &localnet, &netmask, errbuf) < 0)
         err_quit("pcap_lookupnet(): %s", errbuf);
 
@@ -23,7 +26,7 @@ void open_pcap(void)
                 inet_ntop(AF_INET, &localnet, str1, sizeof(str1)),
                 inet_ntop(AF_INET, &netmask, str2, sizeof(str2)));
 
-    snprintf(cmd, sizeof(cmd), cmd, sock_ntop_host(dest, destlen),
+    snprintf(cmd, sizeof(cmd), CMD, sock_ntop_host(dest, destlen),
             ntohs(sock_get_port(dest, destlen)));
 
     if (verbose)

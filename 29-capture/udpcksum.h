@@ -64,3 +64,6 @@ void udp_write(char *, int);
 struct udpiphdr *udp_read(void);
 void test_udp(void);
 void sig_alrm(int);
+void udp_write(char *buf, int userlen);
+struct udpiphdr *udp_check(char *ptr, int len);
+

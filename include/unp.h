@@ -373,4 +373,7 @@ void str_cli_nonb(FILE *fp, int sockfd);
 /* str_cli_fork.c */
 void str_cli_fork(FILE *fp, int sockfd);
 
+/* in_cksum.c */
+uint16_t in_cksum(uint16_t *addr, int len);
+
 #endif /* __ump_h */
