@@ -1,3 +1,5 @@
+#include <stddef.h>         /* for offsetof() */
+
 #include "unp.h"
 
 int main(int argc, char *argv[])
@@ -24,7 +26,10 @@ int main(int argc, char *argv[])
      * the terminating null character. 
      */
     strncpy(addr1.sun_path, argv[1], sizeof(addr1.sun_path) - 1);
-    bind(sockfd, (SA *) &addr1, SUN_LEN(&addr1));
+    
+    /* We could just as well use len = SUN_LEN(&addr1)); */ 
+    len = offsetof(struct sockaddr_un, sun_path) + strlen(addr1.sun_path);
+    bind(sockfd, (SA *) &addr1, len);
 
     len = sizeof(addr2);
     getsockname(sockfd, (SA *) &addr2, &len);

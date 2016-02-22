@@ -36,10 +36,10 @@ struct udpiphdr {
 #define ui_len          ui_i.ih_len   
 #define ui_src          ui_i.ih_src   
 #define ui_dst          ui_i.ih_dst   
-#define ui_sport        ui_u.uh_sport   
-#define ui_dport        ui_u.uh_dport   
-#define ui_ulen         ui_u.uh_ulen   
-#define ui_sum          ui_u.uh_sum
+#define ui_sport        ui_u.source  /* BSD: ui_u.uh_sport */
+#define ui_dport        ui_u.dest    /* BSD: ui_u.uh_dport */
+#define ui_ulen         ui_u.len     /* BSD: ui_u.uh_ulen */
+#define ui_sum          ui_u.check   /* BSD: ui_u.uh_sum */
 
 #define TTL_OUT 64              /* outgoing TTL */
 

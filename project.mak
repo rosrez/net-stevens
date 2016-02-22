@@ -20,6 +20,12 @@ $(BLDDIR):
 INCLUDE_DIRS := ../include
 INCLUDES = $(addprefix -I, $(INCLUDE_DIRS))
 
+STD = 99
+
+ifeq "$(STD)" "99"
+     CFLAGS += -std=gnu99
+endif
+
 # Compile/link flags
 CFLAGS += -g -Wall 
 CPPFLAGS += $(INCLUDES)
@@ -27,12 +33,19 @@ CPPFLAGS += $(INCLUDES)
 # Library framework
 LIBDIR=../lib
 LIBSOCK = $(LIBDIR)/libsock.a
+LIBTHREAD = $(LIBDIR)/libthread.a
 
 LIBS = $(LIBSOCK)
 
-LIBOBJ = $(subst .c,.o,$(wildcard $(LIBDIR)/*.c))
+LIBSOCK_OBJ := $(subst .c,.o,$(wildcard $(LIBDIR)/*.c))
+LIBTHREAD_OBJ := $(LIBDIR)/wrapthread.o
 
-$(LIBSOCK): $(LIBOBJ)
+LIBSOCK_OBJ := $(filter-out $(LIBTHREAD_OBJ), $(LIBSOCK_OBJ))
+
+$(LIBSOCK): $(LIBSOCK_OBJ)
+	$(AR) r $@ $?
+
+$(LIBTHREAD): $(LIBTHREAD_OBJ)
 	$(AR) r $@ $?
 
 .PHONY: clean

@@ -14,5 +14,11 @@
 *.swp
 *.swo
 
-# This project
+# Might include cscope.out or just temporary output files
+*.out
+
+# Any temporary files
+*.tmp
+
+# This projects executable directory
 bin/
